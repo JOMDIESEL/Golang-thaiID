@@ -4,10 +4,11 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-
+	"strings"
 )
 
 func main() {
+	fmt.Println(validateThaiID("1959900459873"))
 	fmt.Println(validateThaiID("1419385944635"))
 }
 
@@ -17,9 +18,14 @@ func validateThaiID(id string) error {
 	}
 	totalValue := calculateSum(id)
 	result := calculateResult(totalValue)
-	if result == 0  {
+
+	splited := strings.Split(id, "")
+	lastID, _ := strconv.Atoi(splited[len(splited)-1])
+
+	if result != lastID  {
 		return errors.New("ID incorrect")
 	}
+
 	return nil
 }
 
