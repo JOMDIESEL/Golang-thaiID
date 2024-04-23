@@ -19,14 +19,18 @@ func validateThaiID(id string) error {
 	totalValue := calculateSum(id)
 	result := calculateResult(totalValue)
 
-	splited := strings.Split(id, "")
-	lastID, _ := strconv.Atoi(splited[len(splited)-1])
+	lastID := conLastDigit(id)
 
 	if result != lastID  {
 		return errors.New("ID incorrect")
+	}else{
+		return nil
 	}
-
-	return nil
+}
+func conLastDigit(id string)int { 
+	splited := strings.Split(id, "")
+	lastID, _ := strconv.Atoi(splited[len(splited)-1])
+	return lastID
 }
 
 func calculateSum(id string) int {
